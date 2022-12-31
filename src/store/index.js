@@ -5,11 +5,13 @@ export default createStore({
   state: {
     isAuthenticated: false,
     sessionId: null,
+    sessionRemember: false,
     sessionData: {
       name: 'Nombre visible',
       details: 'Información extra',
       mail: 'Correo electrónico',
       user: 'Nombre de Usuario',
+      money: {},
       bills: {},
       investments: {},
       img: 'assets/accountImg.png',
@@ -25,66 +27,93 @@ export default createStore({
     },
   },
   getters: {
-    bills(state){
+    money(state) {
+      return state.sessionData.state;
+    },
+    bills(state) {
       return state.sessionData.bills;
     },
-    investments(state){
+    investments(state) {
       return state.sessionData.investments;
     },
-    dashboardInfo(state){
+    dashboardInfo(state) {
       return state.sessionData.dashboardInfo;
     },
-    name(state){
+    name(state) {
       return state.sessionData.name;
     },
-    details(state){
+    details(state) {
       return state.sessionData.details;
     },
-    mail(state){
+    mail(state) {
       return state.sessionData.mail;
     },
-    img(state){
+    img(state) {
       return state.sessionData.img;
     },
-    user(state){
+    user(state) {
       return state.sessionData.user;
     },
   },
   mutations: {
-    setAuthentication(state, authenticated){
+    setAuthentication(state, authenticated) {
       state.isAuthenticated = authenticated;
     },
-    setUserData(state, data){
-      console.log('SETUD')
+    setUserData(state, data) {
+
+      console.log('data 2');
+      console.log(data);
       state.sessionData.name = data.name;
       state.sessionData.details = data.details;
       state.sessionData.mail = data.mail;
       state.sessionData.user = data.user;
       state.sessionData.bills = data.bills;
       state.sessionData.investments = data.investments;
+      state.sessionData.money = data.money;
       state.sessionData.img = data.img;
       state.sessionId = data.id;
-      console.log(state.sessionData);
+      console.log("state.sessionData");
+      console.log(state.sessionRemember);
     },
-    setModal(){}
+    setRemember(state, value){
+      state.sessionRemember = value;
+      localStorage.sessionRemember = value;
+    },
+    setModal() {}
   },
   actions: {
-    performAuthentication(context, value){
+    performAuthentication(context, value) {
+      console.log('---- [LOG] The authentication state is modified. [LOG] ----');
       context.commit('setAuthentication', value);
     },
-    changeUserData(context, data){
-      console.log('Context UD');
-      context.commit('setUserData', data);
+    performRemember(context, value){
+      console.log('---- [LOG] The Remember state is modified. [LOG] ----');
+      context.commit('setRemember', value);
     },
-    changeModal(context, data){
+    changeUserData(context, data) {
+      console.log('Data 1');
+      console.log(data);
+      let defaultData = {
+        name: 'Nombre visible',
+        details: 'Información extra',
+        mail: 'Correo electrónico',
+        user: 'Nombre de Usuario',
+        money: {},
+        bills: {},
+        investments: {},
+        img: 'assets/accountImg.png',
+        id: null,
+      }
+      data = (data == "default") ? defaultData : data;
+      context.commit('setUserData', data);
+      console.log('---- [INFO] The User Data has been changed. [INFO] ----');
+    },
+    changeModal(context, data) {
+      console.log('---- [INFO] The Modal Data  has been changed. [INFO] ----');
       context.commit('setModal', data);
     }
   },
   modules: {
   },
-  plugins: [
-    new VuexPersistance({
-      storage: localStorage
-    }).plugin
-  ]
+  plugins: [new VuexPersistance({storage: localStorage}).plugin]
 })

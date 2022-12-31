@@ -8,6 +8,7 @@ export default {
         user: "",
         password: "",
       },
+      remember: false,
       sessionData: {},
       error: {
         active: false,
@@ -20,15 +21,17 @@ export default {
       console.log('------------------------- SUBMIT LOGIN CONSOLELOG')
       axios.request('http://localhost:3000/login', {params: {app_: "klout.apps.cashmanager",user: this.account.user, password: this.account.password}}).then((r) => {
         if(!r.data.isAuthenticated){
-          console.log('NOT LOGGED')
+          console.log('No lograste iniciar sesión')
           this.error.text = 'Nombre de usuario o contraseña incorrecta.';
         }else{
-          console.log('LOGGED')
+          console.log('Lograste iniciar sesión')
           this.sessionData = r.data;
-          //this.isAuthenticated = r.data.isAuthenticated;
+          this.isAuthenticated = r.data.isAuthenticated;
+          this.$route.params.isAuthenticated = r.data.isAuthenticated;
           this.account.user = "";
           this.account.password = "";
           this.$store.dispatch('performAuthentication', this.isAuthenticated);
+          this.$store.dispatch('performRemember', this.remember);
           this.$store.dispatch('changeUserData', this.sessionData);
           this.goToDashboard();
         }
@@ -43,11 +46,11 @@ export default {
     },
     goToDashboard() {
       console.log('------------------------- LOGINVIEW GO TO DASHBOARD CONSOLELOG')
-      console.log(this.$store.state.isAuthenticated)
-      if (this.isAuthenticated) {
-        this.$router.push('/');
+      console.log('ESTÁ AUTENTICADO: '.concat((this.$store.state.isAuthenticated) ? "Sí" : "No"));
+      if (this.$route.params.isAuthenticated == true) {
+        this.$router.go('/');
       } else {
-        this.$router.push('/login');
+        this.$router.go('/login');
       }
     }
   },
@@ -72,7 +75,7 @@ export default {
               required>
             <div class="card-switch">
               <label class="rememberLabel">
-                <input class="rememberInput" type="checkbox" name="remember" id="rememberMe" />
+                <input class="rememberInput" type="checkbox" name="remember" id="rememberMe" v-model="remember" />
                 No cerrar sesión
               </label>
             </div>

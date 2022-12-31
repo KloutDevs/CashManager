@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
 export default {
   data: () => {
     return {
@@ -13,8 +12,8 @@ export default {
   methods: {
     goToDashboard() {
       console.log('------------------------- APP.JS GO TO DASHBOARD CONSOLELOG')
-      console.log('ESTÁ AUTENTICADO: '+(this.$store.state.isAuthenticated) ? "Sí" : "No");
-      if (this.isAuthenticated) {
+      console.log('ESTÁ AUTENTICADO: '.concat((this.$store.state.isAuthenticated) ? "Sí" : "No"));
+      if (this.$store.state.isAuthenticated) {
         this.$router.push('/');
       } else {
         this.$router.push('/login');
@@ -23,6 +22,7 @@ export default {
   },
   mounted(){
     this.goToDashboard();
+  
   }
 }
 </script>
