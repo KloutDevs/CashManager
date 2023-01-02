@@ -27,7 +27,6 @@ export default {
           console.log('Lograste iniciar sesión')
           this.sessionData = r.data;
           this.isAuthenticated = r.data.isAuthenticated;
-          this.$route.params.isAuthenticated = r.data.isAuthenticated;
           this.account.user = "";
           this.account.password = "";
           this.$store.dispatch('performAuthentication', this.isAuthenticated);
@@ -47,7 +46,7 @@ export default {
     goToDashboard() {
       console.log('------------------------- LOGINVIEW GO TO DASHBOARD CONSOLELOG')
       console.log('ESTÁ AUTENTICADO: '.concat((this.$store.state.isAuthenticated) ? "Sí" : "No"));
-      if (this.$route.params.isAuthenticated == true) {
+      if (this.$store.state.isAuthenticated) {
         this.$router.go('/');
       } else {
         this.$router.go('/login');

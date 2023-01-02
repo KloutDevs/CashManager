@@ -60,9 +60,6 @@ export default createStore({
       state.isAuthenticated = authenticated;
     },
     setUserData(state, data) {
-
-      console.log('data 2');
-      console.log(data);
       state.sessionData.name = data.name;
       state.sessionData.details = data.details;
       state.sessionData.mail = data.mail;
@@ -72,8 +69,6 @@ export default createStore({
       state.sessionData.money = data.money;
       state.sessionData.img = data.img;
       state.sessionId = data.id;
-      console.log("state.sessionData");
-      console.log(state.sessionRemember);
     },
     setRemember(state, value){
       state.sessionRemember = value;
@@ -83,16 +78,14 @@ export default createStore({
   },
   actions: {
     performAuthentication(context, value) {
-      console.log('---- [LOG] The authentication state is modified. [LOG] ----');
+      console.log('---- [LOG STORE] The authentication state is modified. [LOG STORE] ----');
       context.commit('setAuthentication', value);
     },
     performRemember(context, value){
-      console.log('---- [LOG] The Remember state is modified. [LOG] ----');
+      console.log('---- [LOG STORE] The Remember state is modified. [LOG STORE] ----');
       context.commit('setRemember', value);
     },
     changeUserData(context, data) {
-      console.log('Data 1');
-      console.log(data);
       let defaultData = {
         name: 'Nombre visible',
         details: 'Información extra',
@@ -106,10 +99,10 @@ export default createStore({
       }
       data = (data == "default") ? defaultData : data;
       context.commit('setUserData', data);
-      console.log('---- [INFO] The User Data has been changed. [INFO] ----');
+      console.log('---- [INFO STORE] The User Data has been changed. [INFO STORE] ----');
     },
     changeModal(context, data) {
-      console.log('---- [INFO] The Modal Data  has been changed. [INFO] ----');
+      console.log('---- [INFO STORE] The Modal Data  has been changed. [INFO STORE] ----');
       context.commit('setModal', data);
     }
   },

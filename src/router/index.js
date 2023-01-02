@@ -6,17 +6,27 @@ import SignView from '../views/SignView.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Dashboard',
+    component: HomeView
+  },
+  {
+    path: '/tables',
+    name: 'Tables',
+    component: HomeView
+  },
+  {
+    path: '/billing',
+    name: 'Billing',
     component: HomeView
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: LoginView
   },
   {
     path: '/signup',
-    name: 'signup',
+    name: 'SignUp',
     component: SignView
   }
 ]
