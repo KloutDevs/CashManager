@@ -19,7 +19,7 @@ export default {
   methods: {
     submitLogin(){
       console.log('------------------------- SUBMIT LOGIN CONSOLELOG')
-      axios.request('http://localhost:3000/login', {params: {app_: "klout.apps.cashmanager",user: this.account.user, password: this.account.password}}).then((r) => {
+      axios.request(process.env.API_URL+'/login', {params: {app_: "klout.apps.cashmanager",user: this.account.user, password: this.account.password}}).then((r) => {
         if(!r.data.isAuthenticated){
           console.log('No lograste iniciar sesión')
           this.error.text = 'Nombre de usuario o contraseña incorrecta.';

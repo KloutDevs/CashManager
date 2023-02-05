@@ -22,7 +22,9 @@ export default {
           totalMoneyInvested: 'No additional info.',
           totalSales: 'No additional info.',
           totalClients: 'No additional info.',
-        }
+        },
+        billHistory: [],
+        investmentsHistory: []
       }
     }
   },
@@ -72,7 +74,7 @@ export default {
         metals = 0,
         cryptocurrencies = 0,
         others = 0;
-        console.log(this.sessionData.investments.stockMarket);
+      console.log(this.sessionData.investments.stockMarket);
       for (let i = 0; i < this.sessionData.investments.stockMarket.length; i++) {
         stockMarket += parseFloat(this.sessionData.investments.stockMarket[i].invested.$numberDecimal);
       }
@@ -180,6 +182,7 @@ export default {
     this.isAuthenticated = isAuthenticated;
     this.sessionId = sessionId;
     this.sessionData = sessionData;
+    this.data.billHistory = this.sessionData
   }
 };
 </script>
@@ -196,10 +199,10 @@ export default {
         <span class="_appRuteTitle">{{ $route.name }}</span>
       </div>
       <div class="_appDashboardButtons">
-        <i class="filterBtn"></i>
-        <i class="addTransactionBtn"></i>
-        <i class="addBillBtn"></i>
-        <i class="notificationsBtn"></i>
+        <i class="filterBtn bx bxs-filter-alt"></i>
+        <i class="addTransactionBtn bx bxs-file-plus"></i>
+        <i class="addBillBtn bx bxs-cart-add"></i>
+        <i class="notificationsBtn bx bxs-bell"></i>
       </div>
       <div class="_appGeneralStats">
         <div class="_gStatsBox">
@@ -276,7 +279,9 @@ export default {
       <div class="_appBillsHistory"></div>
       <div class="_appSlider"></div>
       <div class="_appRecentTransactions"></div>
-
+      <div class="_appConfigBtn">
+        <i class="bx bxs-cog"></i>
+      </div>
     </div>
   </div>
   <span @click.prevent="log_out">Log Out</span>
