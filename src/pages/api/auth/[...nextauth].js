@@ -1,12 +1,25 @@
+/* NOTAS:
+
+1. Faltan agregar al archivo .env los ID y Secrets de los proovedores correspondientes
+2. Crear un secret especial para cuando se pase la aplicación a modo producción
+
+ */
+
+
+/* GENERAL IMPORTS */
+
 import NextAuth from "next-auth";
+import axios from "axios";
+
+/* PROVIDERS */
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import axios from "axios";
 
 export default NextAuth({
   session: {
-    strategy: "jwt",
+    strategy: "jwt", // Set JSON WEB TOKENS as strategy.
   },
   providers: [
     GitHubProvider({
@@ -23,14 +36,14 @@ export default NextAuth({
         let server = {
           production: process.env.PRODUCTION_BACKEND_SERVER,
           development: process.env.DEVELOPMENT_BACKEND_SERVER,
-        }
+        } // Set the backend server by the app state.
         const user = await axios.request(`${server[process.env.NODE_ENV]}/login`, {
           params: {
-            app_: 'cashmanager',
+            app_: 'klout.apps.cashmanager',
             user: credentials.username,
             password: credentials.password
           }
-        });
+        }); // Make the request to the private backend.
         if (user.data.isAuthenticated === true) {
           return user.data;
         } else {
@@ -49,13 +62,13 @@ export default NextAuth({
       return session;
     },
     redirect: async (url, baseUrl) => {
-      return "/dashboard";
+      return "/app/dashboard";
     }
   },
   pages: {
     signIn: "/login",
     signOut: "/",
-    error: "/auth/error"
+    error: "/login"
   },
   secret: process.env.NEXTAUTH_SECRET,
 });

@@ -13,11 +13,12 @@ export default function Login() {
     e.preventDefault();
     try {
       await signIn("credentials", {
-        redirect: "/dashboard",
+        redirect: true,
         username,
         password,
       });
     } catch (e) {
+      console.log("ERROR INTENTANDO INICIAR SESIÓN")
       console.log(e);
     }
   }
