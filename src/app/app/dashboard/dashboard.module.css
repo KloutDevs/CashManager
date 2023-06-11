@@ -1,23 +1,136 @@
+/* GENERAL */
+
 .container {
-    background-color: red;
-    margin-top: 64px;
+  margin: 4rem 5% 0 5%;
+  position: relative;
+  width: 90%;
 }
+
+.categoryTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+}
+
+/* WALLETS SECTION */
 
 .wallets {
-    background-color: aqua;
+  margin-top: 1em;
+  min-width: 100%;
 }
+
+.walletsContainer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wallet {
+  min-height: 5rem;
+  height: 6rem;
+  min-width: 13.75em;
+  max-height: 7rem;
+  background-color: white !important;
+  overflow: hidden;
+  margin: 0.7em;
+  flex-grow: 1;
+  box-shadow: 0 4px 8px 0 rgba(48, 82, 120, 0.08);
+}
+
+.wallet:hover {
+  box-shadow: 0 4px 8px 0 rgba(48, 82, 120, 0.18);
+  cursor: pointer;
+}
+
+.walletBox {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: column;
+}
+
+.walletIcon {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.walletData {
+  display: grid;
+  padding: 0.8em;
+  grid-column: 2/5;
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+}
+
+.walletTitle {
+  color: #324c5b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.walletDesc {
+  font-size: 0.8em;
+  color: gray;
+}
+
+.walletBalance {
+  font-size: 1.1em;
+  color: #2dba75;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.addBtnsContainer {
+  min-width: 13.75em;
+  flex-grow: 1;
+  margin: 0.7em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.addBtn {
+  flex-grow: 1;
+  min-width: 13.75em;
+  margin: 0.1em;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: white !important;
+  box-shadow: 0 4px 8px 0 rgba(48, 82, 120, 0.08);
+}
+
+.addBtn h4{
+  color: #2dba75 !important;
+}
+
+.addBtn:hover {
+  box-shadow: 0 4px 8px 0 rgba(48, 82, 120, 0.18);
+  cursor: pointer;
+}
+
+/* FILTERS SECTION */
 
 .filters {
-
-    background-color: aqua;
+  min-width: 100%;
+  height: 50px;
 }
+
+/* GRAPHICS SECTION */
 
 .graphics {
-
-    background-color: aqua;
+  background-color: rgb(43, 255, 0);
+  min-width: 100%;
+  height: 50px;
 }
 
-.balances {
+/* BALANCES SECTION */
 
-    background-color: aqua;
+.balances {
+  background-color: rgb(238, 255, 0);
+  min-width: 100%;
+  height: 50px;
 }

@@ -1,0 +1,13 @@
+.header {
+    background-color: white;
+}
+
+.mdLinksContainer{
+    justify-content: center;
+    position: relative;
+}
+
+.mdLinks{
+    text-decoration: none;
+    margin-right: 0.5em;
+}
